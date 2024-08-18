@@ -7,20 +7,29 @@ import { useRouter } from 'next/navigation';
 import {getDatabase,set,ref} from 'firebase/database';
 import '../globals.css'
 import { toast } from 'react-toastify';
+import { useCookies } from 'next-client-cookies';
 const Register = () => {
     const [name,setName]=useState('');
     const [email, setEmail]=useState('');
     const [password, setPassword]=useState('');
     const route=useRouter();
+const cookie=useCookies();
+const auth=getAuth(app);
+
 const createAccount =()=>{
   window.document.getElementById('submit').disabled=true;
 
   window.document.getElementById('loader').style.display='flex';
-    const auth=getAuth(app);
+ 
     createUserWithEmailAndPassword(auth,email,password).then(()=>{
         sendEmailVerification(auth.currentUser).then(()=>{
+
 storedata();
-           toast.info('Verification email sent. Please check your inbox.')
+
+// console.log(auth.currentUser.accessToken)
+// cookie.set('StoreId',false)
+
+toast.info('Verification email sent. Please check your inbox.')
   window.document.getElementById('loader').style.display='none';
 
             route.push('/Login')
@@ -45,7 +54,10 @@ try {
         name:name,
         email:email,
         password:password,
-        uid:id
+        uid:id,
+        store:{
+          active:false,
+        },
     })
 } catch (error) {
     console.log(error);
@@ -88,10 +100,10 @@ try {
 
 </div>
 
-<div id='loader' class="hidden flex-row gap-2 justify-center">
-  <div class="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:.7s]"></div>
-  <div class="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:.3s]"></div>
-  <div class="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:.7s]"></div>
+<div id='loader' className="hidden flex-row gap-2 justify-center">
+  <div className="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:.7s]"></div>
+  <div className="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:.3s]"></div>
+  <div className="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:.7s]"></div>
 </div>
       <div>
         <h5 className="text-black font-outfit ">Already have account? <Link href="/Login" className="text-blue-900 hover:underline font-outfit">Login</Link></h5>

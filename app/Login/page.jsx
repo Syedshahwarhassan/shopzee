@@ -7,11 +7,14 @@ import { app } from '../../Firebase';
 import '../globals.css';
  import {getAuth,signInWithEmailAndPassword} from 'firebase/auth'
 import { toast } from "react-toastify";
+import { useCookies } from "next-client-cookies";
 const Login = () => {
   const [email, setEmail]=useState('');
     const [password, setPassword]=useState('');
     const route=useRouter();
+   const cookie=useCookies();
     const sign=()=>{
+      window.localStorage.setItem('storebtn',false);
       window.document.getElementById('submit').disabled=true;
       window.document.getElementById('loader').style.display='flex';
 
@@ -19,6 +22,8 @@ const Login = () => {
       signInWithEmailAndPassword(auth, email, password)
        .then((userCredential) => {
       if(auth.currentUser.emailVerified==true){
+cookie.set('TokenId',auth.currentUser.accessToken)
+
       toast.success("Login Successful")
       window.document.getElementById('loader').style.display='none';
 
@@ -65,10 +70,10 @@ const Login = () => {
 <button type="submit" id="submit" onClick={()=>sign() } className="my-5 font-outfit font-semibold py-2 px-4 text-xl bg-black text-white h-fit w-fit rounded-xl">Login</button>
 
 </div>
-<div id='loader' class="hidden flex-row gap-2 justify-center">
-  <div class="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:.7s]"></div>
-  <div class="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:.3s]"></div>
-  <div class="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:.7s]"></div>
+<div id='loader' className="hidden flex-row gap-2 justify-center">
+  <div className="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:.7s]"></div>
+  <div className="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:.3s]"></div>
+  <div className="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:.7s]"></div>
 </div>
         <div>
           <h5 className="text-black font-outfit ">Don't have account? <Link href="/Register" className="text-blue-900 hover:underline font-outfit">Register</Link></h5>
