@@ -5,6 +5,7 @@ import "../globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import EditNav from "../components/EditNav";
 import EditSide from "../components/EditSide";
+import { CookiesProvider } from "next-client-cookies";
 
 
 
@@ -24,7 +25,9 @@ export default function EditLayout({ children }) {
 <EditSide/>
 </div>
 <div className="w-full">
+<CookiesProvider>
 {children}
+</CookiesProvider>
 <ToastContainer/>
 </div>
 </div>

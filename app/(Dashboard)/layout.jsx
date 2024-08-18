@@ -1,4 +1,5 @@
 
+import { CookiesProvider } from "next-client-cookies";
 import Sidebar from "../components/Sidebar";
 // import Topnav from "./Topnav/page";
 import "../globals.css";
@@ -32,7 +33,9 @@ const StoreId=cookies().get('StoreId')?.value;
    {(StoreId)?(
     <div className="flex-grow">
     <Topnav/>
-    {children}
+   <CookiesProvider>
+   {children}
+   </CookiesProvider>
     </div>
    ):<Createbtn/>
 
