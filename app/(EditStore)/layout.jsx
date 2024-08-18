@@ -5,7 +5,7 @@ import "../globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import EditNav from "../components/EditNav";
 import EditSide from "../components/EditSide";
-import { CookiesProvider } from "next-client-cookies";
+import { CookiesProvider } from "next-client-cookies/server";
 
 
 

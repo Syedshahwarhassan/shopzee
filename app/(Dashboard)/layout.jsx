@@ -1,5 +1,5 @@
 
-import { CookiesProvider } from "next-client-cookies";
+import { CookiesProvider } from "next-client-cookies/server";
 import Sidebar from "../components/Sidebar";
 // import Topnav from "./Topnav/page";
 import "../globals.css";

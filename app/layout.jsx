@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { app } from "../Firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { cookies } from "next/headers";
-import { CookiesProvider } from 'next-client-cookies';
+import { CookiesProvider } from 'next-client-cookies/server';
 
 
 
