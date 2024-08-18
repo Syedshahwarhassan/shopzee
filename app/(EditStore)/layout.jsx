@@ -32,6 +32,7 @@ export default function EditLayout({ children }) {
 </div>
 </div>
       </body>
+      
     </html>
   );
 }
